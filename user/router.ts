@@ -132,6 +132,7 @@ router.put(
  * @param {number} points - The user's point to be added or subtracted
  * @return {UserResponse} - The updated user
  * @throws {403} - If user is not logged in
+ * @throws {405} - If user does not have any point
  */
 router.put(
   '/points',
@@ -140,43 +141,27 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    console.log(req.body.content)
-    console.log(req.params)
-    if (req.params.id == "add-points"){
-      const user = await UserCollection.addPoints(userId, 10);
+    if (req.body.operation == "add"){
+      const user = await UserCollection.changePoints(userId, 10);
       res.status(200).json({
         message: 'Your points was added successfully.',
         user: util.constructUserResponse(user)
       });
     }
-  }
-);
-
-/**
- * Update a user's points.
- *
- * @name PUT /api/users/points
- *
- * @param {number} points - The user's point to be added or subtracted
- * @return {UserResponse} - The updated user
- * @throws {403} - If user is not logged in
- * @throws {405} - If user does not have any point
- */
- router.put(
-  '/points',
-  [
-    userValidator.isUserLoggedIn,
-    userValidator.isPointGreaterThanZero
-  ],
-  async (req: Request, res: Response) => {
-    const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    console.log(req)
-    if (req.params.id == "deduct-points"){
-      const user = await UserCollection.deductPoints(userId, 1);
-      res.status(200).json({
-        message: 'Your points was deducted successfully.',
-        user: util.constructUserResponse(user)
-      });
+    else if (req.body.operation == "deduct"){
+      const points = await UserCollection.findPoints(userId);
+      if (points > 0){
+        const user = await UserCollection.changePoints(userId, -1);
+        res.status(200).json({
+          message: 'Your points was added successfully.',
+          user: util.constructUserResponse(user)
+        });
+      }
+      else{
+        res.status(403).json({
+          error: 'You do not have enough points'
+        });
+      }
     }
   }
 );
