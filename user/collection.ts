@@ -81,30 +81,29 @@ class UserCollection {
   }
 
   /**
+     * Find a user's points
+     *
+     * @param {string} userId - The userId of the user to update
+     * @return {Promise<Number> } - The number of points a user has
+     */
+   static async findPoints(userId: Types.ObjectId | string): Promise<Number> {
+    let user = await UserModel.findOne({_id: userId})
+    return user.points
+   }
+
+  /**
      * Increase a user's point
      *
      * @param {string} userId - The userId of the user to update
      * @return {Promise<HydratedDocument<User>> | Promise<null> } - The user with updated point
      */
-   static async addPoints(userId: Types.ObjectId | string, points: number = 10): Promise<HydratedDocument<User>> {
+   static async changePoints(userId: Types.ObjectId | string, points: number = 10): Promise<HydratedDocument<User>> {
     let user = await UserModel.findOne({_id: userId})
     user.points += points;
     await user.save();
     return user
 }
- 
-  /**
-     * Decrease a user's point
-     *
-     * @param {string} userId - The userId of the user to update
-     * @return {Promise<HydratedDocument<User>> | Promise<null> } - The user with updated point
-     */
-   static async deductPoints(userId: Types.ObjectId | string, points: number = 1): Promise<HydratedDocument<User>> {
-    let user = await UserModel.findOne({_id: userId})
-    user.points -= points;
-    await user.save();
-    return user
-}
+
 
   /**
    * Delete a user from the collection.
