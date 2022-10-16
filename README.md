@@ -313,3 +313,144 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+#### `PUT /api/users/points` - Update a user's points
+
+**Body** 
+
+- `operation` _{string}_ The user's point operation to be added or subtracted
+
+**Returns** 
+
+- A success message
+
+- An object with the updated user points
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+- `405` if username is doing a deduction and does not have any point
+
+#### `GET /api/users/timer` - Find a user’s current time limit
+
+**Returns** 
+
+- A success message
+
+- An object with the user’s time limit; defaults to 24 hours
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+#### `PUT /api/users/timer` - Updates a user’s time limit
+
+**Returns** 
+
+- A success message
+
+- An object with the user’s new time limit
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+#### `GET /api/users/countdown` - Finds the time user has left on the app each day
+
+**Returns** 
+
+- An object with the user’s time limit on the app
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+#### `GET /api/survey` - Gets the survey for the user
+
+**Returns** 
+
+- An survey with the questions for users to fill out
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+#### `PUT /api/survey` - Updates a user's survey response
+
+**Body** 
+
+- `question1` _{string}_ The user's answer to question 1
+
+- `question2` _{string}_ The user's answer to question 2
+
+- `question3` _{string}_ The user's answer to question 3
+
+**Returns** 
+
+- A success message
+
+- An object with the updated user response
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+#### `GET /api/friends` - Finds all user's friends
+
+**Returns** 
+
+- An array of the user’s friends
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+#### `POST /api/friends/:userId1?/:userId2?` - Add a friend
+
+**Returns** 
+
+- A success message
+- An object with the newly created pair of friends
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+- `404` if the user does not exist
+
+#### `DELETE /api/friends/:userId1?/:userId2?` - Remove a friend
+
+**Returns** 
+
+- A success message
+
+**Throws** 
+
+- `403` if user 1 is not logged in
+
+- `404` if the user 1 is not friends with user 2 (or vice versa, pair doesn't exist)
+
+#### `GET /api/messages/:userId?` - Find the chat with a friend
+
+**Returns** 
+
+-  a chat with a friend
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+- `404` if the user does not exist or not friends with user
+
+#### `POST /api/messages/:userId?` - Send a message to a friend
+
+**Returns** 
+
+-  a chat with a friend
+
+**Throws** 
+
+- `403` if the user is not logged in
+
+- `404` if the user does not exist or not friends with user

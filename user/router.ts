@@ -129,7 +129,7 @@ router.put(
  *
  * @name PUT /api/users/points
  *
- * @param {number} points - The user's point to be added or subtracted
+ * @param {string} operation - The user's point operation to be added or subtracted
  * @return {UserResponse} - The updated user
  * @throws {403} - If user is not logged in
  * @throws {405} - If user does not have any point
