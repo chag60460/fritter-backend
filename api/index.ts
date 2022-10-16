@@ -70,7 +70,7 @@ app.use(userValidator.isCurrentSessionUserExists);
 
 // GET home page
 app.get('/', (req: Request, res: Response) => {
-  res.render('index');
+  res.render('index'); //renders from index.html inside public folder
 });
 
 // Add routers from routes folder

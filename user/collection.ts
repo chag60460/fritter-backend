@@ -20,8 +20,8 @@ class UserCollection {
    */
   static async addOne(username: string, password: string): Promise<HydratedDocument<User>> {
     const dateJoined = new Date();
-
-    const user = new UserModel({username, password, dateJoined});
+    const points = 0;
+    const user = new UserModel({username, password, dateJoined, points});
     await user.save(); // Saves user to MongoDB
     return user;
   }
@@ -76,10 +76,35 @@ class UserCollection {
     if (userDetails.username) {
       user.username = userDetails.username as string;
     }
-
     await user.save();
     return user;
   }
+
+  /**
+     * Increase a user's point
+     *
+     * @param {string} userId - The userId of the user to update
+     * @return {Promise<HydratedDocument<User>> | Promise<null> } - The user with updated point
+     */
+   static async addPoints(userId: Types.ObjectId | string, points: number = 10): Promise<HydratedDocument<User>> {
+    let user = await UserModel.findOne({_id: userId})
+    user.points += points;
+    await user.save();
+    return user
+}
+ 
+  /**
+     * Decrease a user's point
+     *
+     * @param {string} userId - The userId of the user to update
+     * @return {Promise<HydratedDocument<User>> | Promise<null> } - The user with updated point
+     */
+   static async deductPoints(userId: Types.ObjectId | string, points: number = 1): Promise<HydratedDocument<User>> {
+    let user = await UserModel.findOne({_id: userId})
+    user.points -= points;
+    await user.save();
+    return user
+}
 
   /**
    * Delete a user from the collection.
