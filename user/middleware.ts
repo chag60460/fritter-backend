@@ -153,21 +153,6 @@ const isAuthorExists = async (req: Request, res: Response, next: NextFunction) =
   next();
 };
 
-/**
- * Checks if a user's point is greater than 0
- */
- const isPointGreaterThanZero = async (req: Request, res: Response, next: NextFunction) => {
-  const user = await UserCollection.findOneByUsername(req.query.author as string);
-  if (user.points == 0) {
-    res.status(405).json({
-      error: `Points cannot be deducted from a user with 0 point.`
-    });
-    return;
-  }
-
-  next();
-};
-
 export {
   isCurrentSessionUserExists,
   isUserLoggedIn,
@@ -177,5 +162,4 @@ export {
   isAuthorExists,
   isValidUsername,
   isValidPassword,
-  isPointGreaterThanZero
 };
