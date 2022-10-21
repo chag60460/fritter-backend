@@ -51,16 +51,17 @@ import SurveyCollection from '../survey/collection';
     for (let subject in req.body){
       topics.push(req.body[subject]);
     }
-    
-    if (!topics) {
+
+    //Find whether user wants different or not
+    const different = topics.pop();
+
+    console.log(!topics)
+    if (topics.length == 0) {
       res.status(400).json({
         error: 'Topics cannot be empty.'
       });
       return;
     }
-
-    //Find whether user wants different or not
-    const different = topics.pop();
 
     if (!((different == 'true') || (different == 'false'))){
       res.status(400).json({

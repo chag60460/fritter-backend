@@ -366,25 +366,46 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
-#### `GET /api/survey` - Gets the survey for the user
+#### `POST /api/survey` - Updates a user's survey response
+
+**Body** 
+
+- `topics` _{Array<String>}_ The user's interested topics
+
+- `different` _{boolean}_ Whether the user is interested in differing perspective
 
 **Returns** 
 
-- An survey with the questions for users to fill out
+- A success message
+
+- An object with the newly creater user survey
 
 **Throws** 
 
 - `403` if the user is not logged in
+- `400` If the topics or different are empty
+
+
+#### `GET /api/survey` - Gets the survey for the user
+
+**Returns** 
+
+- An survey with user response
+
+**Throws** 
+
+- `403` if the user is not logged in
+- `404` if the survey does not exist
+- `400` If the topics or different are empty
+
 
 #### `PUT /api/survey` - Updates a user's survey response
 
 **Body** 
 
-- `question1` _{string}_ The user's answer to question 1
+- `topics` _{Array<String>}_ The user's interested topics
 
-- `question2` _{string}_ The user's answer to question 2
-
-- `question3` _{string}_ The user's answer to question 3
+- `different` _{boolean}_ Whether the user is interested in differing perspective
 
 **Returns** 
 
@@ -395,6 +416,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws** 
 
 - `403` if the user is not logged in
+- `404` if the survey does not exist
 
 #### `GET /api/friends` - Finds all user's friends
 

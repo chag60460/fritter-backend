@@ -80,11 +80,17 @@ router.put(
     '/',
     [
         userValidator.isUserLoggedIn,
-        surveyValidator.isSurveyExists
+        surveyValidator.isSurveyExists,
+        surveyValidator.isValidSurveyResponse
     ],
     async (req: Request, res: Response) => {
         const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-        const survey = await SurveyCollection.updateUserSurveyResponse(userId, req.body.topics, req.body.different);
+        let topics: Array<String> = []; 
+        for (let subject in req.body){
+            topics.push(req.body[subject]);
+        }
+        const different = topics.pop() === 'true';
+        const survey = await SurveyCollection.updateUserSurveyResponse(userId, topics, different);
         res.status(200).json({
             message: 'Your survey was updated successfully.',
             freet: util.constructSurveyResponse(survey)

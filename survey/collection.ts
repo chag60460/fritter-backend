@@ -36,14 +36,11 @@ class SurveyCollection{
     * @param {boolean} different - A boolean indicating whether the user wants to see differing perspective
     * @return {Promise<HydratedDocument<User>>} - The updated user
     */
-    static async updateUserSurveyResponse(userId: Types.ObjectId | string, topics?: Array<String>, different?: boolean): Promise<HydratedDocument<Survey>> {
+    static async updateUserSurveyResponse(userId: Types.ObjectId | string, topics: Array<String>, different: boolean): Promise<HydratedDocument<Survey>> {
         const survey = await SurveyModel.findOne({userId: userId});
-        if (topics) {
-            survey.topics = topics;
-        }
-        if (different) {
-            survey.different = different;
-        }
+        survey.topics = topics;
+        survey.different = different;
+        survey.dateUpdated = new Date();
         await survey.save();
         return survey.populate('userId');
     }
