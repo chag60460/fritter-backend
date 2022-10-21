@@ -40,11 +40,14 @@ const formsAndHandlers = {
   'view-freets-by-author': viewFreetsByAuthor,
   'create-freet': createFreet,
   'edit-freet': editFreet,
-  'delete-freet': deleteFreet
+  'delete-freet': deleteFreet,
+  'create-survey': createSurvey,
+  'fetch-survey': fetchSurvey
 };
 
 // Attach handlers to forms
 function init() {
+  console.log("Check to see if it's called")
   Object.entries(formsAndHandlers).forEach(([formID, handler]) => {
     const form = document.getElementById(formID);
     form.onsubmit = e => {
