@@ -33,6 +33,12 @@ function deductPoints(fields){
   .catch(showResponse)
 }
 
+function changeLimit(fields){
+  fetch('/api/users/limit', {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+  .then(showResponse)
+  .catch(showResponse)
+}
+
 function deleteUser(fields) {
   fetch('/api/users', {method: 'DELETE'})
     .then(showResponse)

@@ -168,6 +168,31 @@ router.put(
 );
 
 /**
+ * Change a user's time limit
+ * @name PUT /api/users/limit
+ * 
+ * @param {number} limit - the new limit the user sets
+ * @return {UserResponse} - The updated user
+ * @throws {403} - If user is not logged in
+ */
+router.put(
+  '/limit',
+  [
+    userValidator.isUserLoggedIn,
+  ],
+  async (req: Request, res: Response) => {
+    const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+    console.log(req.body)
+    const newLimit = req.body.limit;
+    const user = await UserCollection.changeLimit(userId, newLimit);
+    res.status(200).json({
+      message: 'Your time limit was updated successfully.',
+      user: util.constructUserResponse(user)
+    });
+  }
+)
+
+/**
  * Delete a user.
  *
  * @name DELETE /api/users

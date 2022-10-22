@@ -43,7 +43,8 @@ const formsAndHandlers = {
   'delete-freet': deleteFreet,
   'create-survey': createSurvey,
   'fetch-survey': fetchSurvey,
-  'edit-survey': editSurvey
+  'edit-survey': editSurvey,
+  'change-limit': changeLimit
 };
 
 // Attach handlers to forms

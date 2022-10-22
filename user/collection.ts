@@ -21,7 +21,8 @@ class UserCollection {
   static async addOne(username: string, password: string): Promise<HydratedDocument<User>> {
     const dateJoined = new Date();
     const points = 0;
-    const user = new UserModel({username, password, dateJoined, points});
+    const limit = 24;
+    const user = new UserModel({username, password, dateJoined, points, limit});
     await user.save(); // Saves user to MongoDB
     return user;
   }
@@ -102,7 +103,21 @@ class UserCollection {
     user.points += points;
     await user.save();
     return user
-}
+  }
+
+  /**
+     * Change a user's time limit
+     *
+     * @param {string} userId - The userId of the user to update
+     * @param {number} limit - the new time limit of the user
+     * @return {Promise<HydratedDocument<User>> | Promise<null> } - The user with updated time limit
+     */
+   static async changeLimit(userId: Types.ObjectId | string, limit: number): Promise<HydratedDocument<User>> {
+    let user = await UserModel.findOne({_id: userId})
+    user.limit = limit;
+    await user.save();
+    return user
+  }
 
 
   /**
