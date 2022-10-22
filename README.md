@@ -332,7 +332,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `405` if username is doing a deduction and does not have any point
 
-#### `GET /api/users/timer` - Find a user’s current time limit
+#### `GET /api/users/limit` - Find a user’s current time limit
 
 **Returns** 
 
@@ -344,7 +344,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
-#### `PUT /api/users/timer` - Updates a user’s time limit
+#### `PUT /api/users/limit` - Updates a user’s time limit
 
 **Returns** 
 

@@ -1,4 +1,5 @@
 import type {HydratedDocument, Types} from 'mongoose';
+import { constructSurveyResponse } from 'survey/util';
 import type {User} from './model';
 import UserModel from './model';
 
@@ -22,7 +23,8 @@ class UserCollection {
     const dateJoined = new Date();
     const points = 0;
     const limit = 24;
-    const user = new UserModel({username, password, dateJoined, points, limit});
+    const dateLoggedIn = new Date();
+    const user = new UserModel({username, password, dateJoined, points, limit, dateLoggedIn});
     await user.save(); // Saves user to MongoDB
     return user;
   }
@@ -117,6 +119,20 @@ class UserCollection {
     user.limit = limit;
     await user.save();
     return user
+  }
+
+  /**
+     * Find a user's time limit
+     *
+     * @param {string} userId - The userId of the user to update
+     * @return {Promise<Number>| Promise<null> } - The user with updated time limit
+     */
+   static async findLimit(userId: Types.ObjectId | string): Promise<Number> {
+    const user = await UserModel.findOne({_id: userId});
+    const current_hour = new Date().getHours();
+    const session_hour = user.dateLoggedIn.getHours();
+    const countdown = Math.max(user.limit - (current_hour - session_hour), 0);
+    return countdown
   }
 
 

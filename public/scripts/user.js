@@ -39,6 +39,12 @@ function changeLimit(fields){
   .catch(showResponse)
 }
 
+function trackTime(fields){
+  fetch('/api/users/countdown', {method: 'GET', headers: {'Content-Type': 'application/json'}})
+  .then(showResponse)
+  .catch(showResponse)
+}
+
 function deleteUser(fields) {
   fetch('/api/users', {method: 'DELETE'})
     .then(showResponse)

@@ -26,7 +26,6 @@ import SurveyCollection from '../survey/collection';
  * Checks if a survey with userId exists
  */
  const isSurveyExists = async (req: Request, res: Response, next: NextFunction) => {
-  console.log("check if second middle ware is reached")  
   const validFormat = Types.ObjectId.isValid(req.session.userId);
     const survey = validFormat ? await SurveyCollection.findUserSurveyResponse(req.session.userId) : '';
     if (!survey) {
@@ -55,7 +54,6 @@ import SurveyCollection from '../survey/collection';
     //Find whether user wants different or not
     const different = topics.pop();
 
-    console.log(!topics)
     if (topics.length == 0) {
       res.status(400).json({
         error: 'Topics cannot be empty.'

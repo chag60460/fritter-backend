@@ -23,7 +23,6 @@ const router = express.Router();
         surveyValidator.isSurveyExists
     ],
     async (req: Request, res: Response) => {
-        console.log("checks to see if router.get is called")
         const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
         const survey = await SurveyCollection.findUserSurveyResponse(userId);
 

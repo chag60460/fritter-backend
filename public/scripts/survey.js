@@ -5,7 +5,6 @@ function createSurvey(fields) {
 }
 
 function fetchSurvey(fields) {
-    console.log("check fetchSurvey js helper method")
     fetch('/api/survey', {method: 'GET'})
       .then(showResponse)
       .catch(showResponse);

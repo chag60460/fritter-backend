@@ -44,12 +44,12 @@ const formsAndHandlers = {
   'create-survey': createSurvey,
   'fetch-survey': fetchSurvey,
   'edit-survey': editSurvey,
-  'change-limit': changeLimit
+  'change-limit': changeLimit,
+  'track-time': trackTime
 };
 
 // Attach handlers to forms
 function init() {
-  console.log("Check to see if it's called")
   Object.entries(formsAndHandlers).forEach(([formID, handler]) => {
     const form = document.getElementById(formID);
     form.onsubmit = e => {

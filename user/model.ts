@@ -14,6 +14,7 @@ export type User = {
   dateJoined: Date;
   points: number;
   limit: number;
+  dateLoggedIn: Date;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -43,6 +44,11 @@ const UserSchema = new Schema({
   //The currently limit a user set
   limit: {
     type: Number,
+    required: true
+  },
+  // The time the user logs in
+  dateLoggedIn: {
+    type: Date,
     required: true
   }
 });

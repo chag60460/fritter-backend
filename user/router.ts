@@ -34,6 +34,7 @@ router.post(
     const user = await UserCollection.findOneByUsernameAndPassword(
       req.body.username, req.body.password
     );
+    user.dateLoggedIn = new Date();
     req.session.userId = user._id.toString();
     res.status(201).json({
       message: 'You have logged in successfully',
@@ -182,12 +183,33 @@ router.put(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    console.log(req.body)
     const newLimit = req.body.limit;
     const user = await UserCollection.changeLimit(userId, newLimit);
     res.status(200).json({
       message: 'Your time limit was updated successfully.',
       user: util.constructUserResponse(user)
+    });
+  }
+)
+
+/**
+ * Change a user's time limit
+ * @name GET /api/users/limit
+ * 
+ * @return {UserResponse} - The updated user
+ * @throws {403} - If user is not logged in
+ */
+ router.get(
+  '/countdown',
+  [
+    userValidator.isUserLoggedIn,
+  ],
+  async (req: Request, res: Response) => {
+    const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+    const limit = await UserCollection.findLimit(userId);
+    const formated_str = `Your time left on Fritter is ${limit} hours`;
+    res.status(200).json({
+      message: formated_str,
     });
   }
 )
