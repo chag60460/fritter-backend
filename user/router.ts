@@ -35,6 +35,7 @@ router.post(
       req.body.username, req.body.password
     );
     user.dateLoggedIn = new Date();
+    user.save();
     req.session.userId = user._id.toString();
     res.status(201).json({
       message: 'You have logged in successfully',
@@ -207,10 +208,16 @@ router.put(
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const limit = await UserCollection.findLimit(userId);
-    const formated_str = `Your time left on Fritter is ${limit} hours`;
-    res.status(200).json({
-      message: formated_str,
-    });
+    if (limit > 0){
+      const formated_str = `Your time left on Fritter is ${limit} hours`;
+      res.status(200).json({
+        message: formated_str,
+      });
+    }
+    else {
+      req.session.userId = undefined;
+    }
+    
   }
 )
 
