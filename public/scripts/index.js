@@ -45,7 +45,11 @@ const formsAndHandlers = {
   'fetch-survey': fetchSurvey,
   'edit-survey': editSurvey,
   'change-limit': changeLimit,
-  'track-time': trackTime
+  'track-time': trackTime,
+  'sendrequest': sendFriendRequest,
+  'acceptrequest': acceptFriendRequest,
+  'declinerequest': declineFriendRequest,
+  'deletefriend': deleteFriend
 };
 
 // Attach handlers to forms

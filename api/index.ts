@@ -1,4 +1,3 @@
-// This file must be in the /api folder for Vercel to detect it as a serverless function
 import type {Request, Response} from 'express';
 import express from 'express';
 import {engine} from 'express-handlebars';
@@ -11,7 +10,8 @@ import dotenv from 'dotenv';
 import * as userValidator from '../user/middleware';
 import {userRouter} from '../user/router';
 import {freetRouter} from '../freet/router';
-import {surveyRouter} from '../survey/router'
+import {surveyRouter} from '../survey/router';
+import {friendRouter} from '../friend/router'
 
 // Load environmental variables
 dotenv.config({});
@@ -78,6 +78,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/users', userRouter);
 app.use('/api/freets', freetRouter);
 app.use('/api/survey', surveyRouter);
+app.use('/api/friends', friendRouter)
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

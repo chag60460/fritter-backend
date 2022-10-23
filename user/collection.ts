@@ -24,7 +24,8 @@ class UserCollection {
     const points = 0;
     const limit = 24;
     const dateLoggedIn = new Date();
-    const user = new UserModel({username, password, dateJoined, points, limit, dateLoggedIn});
+    const pendingRequests = [] as String[];
+    const user = new UserModel({username, password, dateJoined, points, limit, dateLoggedIn, pendingRequests});
     await user.save(); // Saves user to MongoDB
     return user;
   }

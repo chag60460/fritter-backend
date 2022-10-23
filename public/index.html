@@ -8,6 +8,7 @@
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/survey.js"></script>
+  <script src="/scripts/friend.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -237,6 +238,36 @@
         <form id="track-time" name="track-time">
           <h3>View My Countdown</h3>
           <input type="submit" value="View">
+        </form>
+
+        <form id="sendrequest" name="sendrequest">
+          <h3>Send Friend Request</h3>
+          <p>Friend Username:</p>
+          <input type="text" placeholder="Type in his/her username" name="user" id="user">
+          <input type="submit" value="Send Friend Request">
+        </form>
+
+        <form id="acceptrequest" name="acceptrequest">
+          <h3>Accept Friend Request</h3>
+          <p>Friend Request Username:</p>
+          <input type="text" placeholder="Type in his/her username" name="user" id="user">
+          <input id="operation" name="operation" type="hidden" value="accept">
+          <input type="submit" value="Accept Friend Request">
+        </form>
+
+        <form id="declinerequest" name="declinerequest">
+          <h3>Decline Friend Request</h3>
+          <p>Friend Request Username:</p>
+          <input type="text" placeholder="Type in his/her username" name="user" id="user">
+          <input id="operation" name="operation" type="hidden" value="decline">
+          <input type="submit" value="Decline Friend Request">
+        </form>
+
+        <form id="deletefriend" name="deletefriend">
+          <h3>Delete Friend</h3>
+          <p>Friend Username:</p>
+          <input type="text" placeholder="Type in his/her username" name="user" id="user">
+          <input type="submit" value="Delete Friend">
         </form>
       </div>
 

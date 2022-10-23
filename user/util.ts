@@ -10,6 +10,7 @@ type UserResponse = {
   points: number;
   limit: number;
   dateLoggedIn: string;
+  pendingRequests: Array<String>;
 };
 
 /**
@@ -39,7 +40,8 @@ const constructUserResponse = (user: HydratedDocument<User>): UserResponse => {
     ...userCopy,
     _id: userCopy._id.toString(),
     dateJoined: formatDate(user.dateJoined),
-    dateLoggedIn: formatDate(user.dateLoggedIn)
+    dateLoggedIn: formatDate(user.dateLoggedIn),
+    pendingRequests: userCopy.pendingRequests
   };
 };
 

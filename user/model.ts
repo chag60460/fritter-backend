@@ -15,6 +15,7 @@ export type User = {
   points: number;
   limit: number;
   dateLoggedIn: Date;
+  pendingRequests: Array<String>;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -49,6 +50,11 @@ const UserSchema = new Schema({
   // The time the user logs in
   dateLoggedIn: {
     type: Date,
+    required: true
+  },
+  //The pending requests a user currently has
+  pendingRequests: {
+    type: Array,
     required: true
   }
 });
