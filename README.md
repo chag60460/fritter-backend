@@ -178,33 +178,26 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `GET /api/freets` - Get all the freets
 
 **Returns**
-
 - An array of all freets sorted in descending order by date modified
-
 #### `GET /api/freets?author=USERNAME` - Get freets by author
 
 **Returns**
-
 - An array of freets created by user with username `author`
 
 **Throws**
-
 - `400` if `author` is not given
 - `404` if `author` is not a recognized username of any user
 
 #### `POST /api/freets` - Create a new freet
 
 **Body**
-
 - `content` _{string}_ - The content of the freet
 
 **Returns**
-
 - A success message
 - A object with the created freet
 
 **Throws**
-
 - `403` if the user is not logged in
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
@@ -212,11 +205,9 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `DELETE /api/freets/:freetId?` - Delete an existing freet
 
 **Returns**
-
 - A success message
 
 **Throws**
-
 - `403` if the user is not logged in
 - `403` if the user is not the author of the freet
 - `404` if the freetId is invalid
@@ -224,16 +215,13 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `PUT /api/freets/:freetId?` - Update an existing freet
 
 **Body**
-
 - `content` _{string}_ - The new content of the freet
 
 **Returns**
-
 - A success message
 - An object with the updated freet
 
 **Throws**
-
 - `403` if the user is not logged in
 - `404` if the freetId is invalid
 - `403` if the user is not the author of the freet
@@ -243,17 +231,14 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `POST /api/users/session` - Sign in user
 
 **Body**
-
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
 
 **Returns**
-
 - A success message
 - An object with user's details (without password)
 
 **Throws**
-
 - `403` if the user is already logged in
 - `400` if username or password is not in correct format format or missing in the req
 - `401` if the user login credentials are invalid
@@ -261,27 +246,22 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `DELETE /api/users/session` - Sign out user
 
 **Returns**
-
 - A success message
 
 **Throws**
-
 - `403` if user is not logged in
 
 #### `POST /api/users` - Create an new user account
 
 **Body**
-
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
 
 **Returns**
-
 - A success message
 - An object with the created user's details (without password)
 
 **Throws**
-
 - `403` if there is a user already logged in
 - `400` if username or password is in the wrong format
 - `409` if username is already in use
@@ -289,17 +269,14 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `PUT /api/users` - Update a user's profile
 
 **Body** _(no need to add fields that are not being changed)_
-
 - `username` _{string}_ - The user's username
 - `password` _{string}_ - The user's password
 
 **Returns**
-
 - A success message
 - An object with the update user details (without password)
 
 **Throws**
-
 - `403` if the user is not logged in
 - `400` if username or password is in the wrong format
 - `409` if the username is already in use
@@ -307,81 +284,61 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `DELETE /api/users` - Delete user
 
 **Returns**
-
 - A success message
 
 **Throws**
-
 - `403` if the user is not logged in
 
 #### `PUT /api/users/points` - Update a user's points
 
 **Body** 
-
 - `operation` _{string}_ The user's point operation to be added or subtracted
 
 **Returns** 
-
 - A success message
-
 - An object with the updated user points
 
 **Throws** 
-
 - `403` if the user is not logged in
-
 - `405` if username is doing a deduction and does not have any point
 
 #### `GET /api/users/limit` - Find a user’s current time limit
 
 **Returns** 
-
 - A success message
-
 - An object with the user’s time limit; defaults to 24 hours
 
 **Throws** 
-
 - `403` if the user is not logged in
 
 #### `PUT /api/users/limit` - Updates a user’s time limit
 
 **Returns** 
-
 - A success message
-
 - An object with the user’s new time limit
 
 **Throws** 
-
 - `403` if the user is not logged in
 
 #### `GET /api/users/countdown` - Finds the time user has left on the app each day
 
 **Returns** 
-
 - An object with the user’s time limit on the app
 
 **Throws** 
-
 - `403` if the user is not logged in
 
 #### `POST /api/survey` - Updates a user's survey response
 
 **Body** 
-
 - `topics` _{Array<String>}_ The user's interested topics
-
 - `different` _{boolean}_ Whether the user is interested in differing perspective
 
 **Returns** 
-
 - A success message
-
 - An object with the newly creater user survey
 
 **Throws** 
-
 - `403` if the user is not logged in
 - `400` If the topics or different are empty
 
@@ -389,11 +346,9 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `GET /api/survey` - Gets the survey for the user
 
 **Returns** 
-
 - An survey with user response
 
 **Throws** 
-
 - `403` if the user is not logged in
 - `404` if the survey does not exist
 - `400` If the topics or different are empty
@@ -402,77 +357,51 @@ This renders the `index.html` file that will be used to interact with the backen
 #### `PUT /api/survey` - Updates a user's survey response
 
 **Body** 
-
 - `topics` _{Array<String>}_ The user's interested topics
-
 - `different` _{boolean}_ Whether the user is interested in differing perspective
 
 **Returns** 
-
 - A success message
-
 - An object with the updated user response
 
 **Throws** 
-
 - `403` if the user is not logged in
 - `404` if the survey does not exist
 
-#### `GET /api/friends` - Finds all user's friends
+#### `POST /api/friends/` - Send a friend request
 
 **Returns** 
-
-- An array of the user’s friends
-
-**Throws** 
-
-- `403` if the user is not logged in
-
-#### `POST /api/friends/:userId1?/:userId2?` - Add a friend
-
-**Returns** 
-
 - A success message
-- An object with the newly created pair of friends
+- An object with the newly sent friend request
 
 **Throws** 
-
-- `403` if the user is not logged in
-
+- `403` if the user is not logged in, the user is sending itself a friend request, or the friend request/friend already exists
 - `404` if the user does not exist
 
-#### `DELETE /api/friends/:userId1?/:userId2?` - Remove a friend
+#### `PUT /api/friends/` - Accept or Decline a friend request
+
+**Returns**
+- A success message
+- An object with the newly accept friend request (if accept)
+
+**Throws**
+- `403` if the user is not logged in
+- `404` if the user does not exist or the request does not exist
+
+#### `DELETE /api/friends/` - Remove a friend
 
 **Returns** 
-
 - A success message
 
 **Throws** 
+- `403` - if the user is not logged in or not friends with the logged in user
+- `404` - if the user does not exist 
 
-- `403` if user 1 is not logged in
-
-- `404` if the user 1 is not friends with user 2 (or vice versa, pair doesn't exist)
-
-#### `GET /api/messages/:userId?` - Find the chat with a friend
+#### `POST /api/messages/` - Send a message to a friend
 
 **Returns** 
-
 -  a chat with a friend
 
 **Throws** 
-
-- `403` if the user is not logged in
-
-- `404` if the user does not exist or not friends with user
-
-#### `POST /api/messages/:userId?` - Send a message to a friend
-
-**Returns** 
-
--  a chat with a friend
-
-**Throws** 
-
-- `403` if the user is not logged in
-
+- `403` if the user is not logged in or trying to message itself
 - `404` if the user does not exist or not friends with user

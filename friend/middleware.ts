@@ -1,5 +1,4 @@
 import type {Request, Response, NextFunction} from 'express';
-import {Types} from 'mongoose';
 import UserCollection from '../user/collection';
 import FriendModel from './model'
 
@@ -18,7 +17,7 @@ import FriendModel from './model'
     //Check if the usernames are the same
     if (user1_username==user2_username) {
         res.status(403).json({
-            error: `You cannot send yourself a friend request.`
+            error: `You cannot send yourself a friend request or message.`
           });
           return;   
     }
