@@ -49,7 +49,8 @@ const formsAndHandlers = {
   'sendrequest': sendFriendRequest,
   'acceptrequest': acceptFriendRequest,
   'declinerequest': declineFriendRequest,
-  'deletefriend': deleteFriend
+  'deletefriend': deleteFriend,
+  'sendmessage': sendMessage
 };
 
 // Attach handlers to forms

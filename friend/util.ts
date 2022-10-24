@@ -13,7 +13,7 @@ type FriendResponse = {
  * with all the information needed by the frontend
  *
  * @param {HydratedDocument<Friend>} friend - A pair of friend
- * @returns {FriendResponse} - The freet object formatted for the frontend
+ * @returns {FriendResponse} - The friend object formatted for the frontend
  */
  const constructFriendResponse = (friend: HydratedDocument<Friend>): FriendResponse => {
   const friendCopy: Friend = {

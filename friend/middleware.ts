@@ -95,7 +95,7 @@ import FriendModel from './model'
     }
     
     else {
-        res.status(404).json({
+        res.status(403).json({
             error: `You are not friends with ${user2_username}.`
         });
         

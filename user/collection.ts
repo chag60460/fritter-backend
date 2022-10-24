@@ -1,5 +1,4 @@
 import type {HydratedDocument, Types} from 'mongoose';
-import { constructSurveyResponse } from 'survey/util';
 import type {User} from './model';
 import UserModel from './model';
 
